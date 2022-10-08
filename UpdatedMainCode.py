@@ -31,3 +31,19 @@ def main():
 
     baseURL = 'https://api.thingspeak.com/update?api_key=%s' % myAPI
     print baseURL
+
+    while True:
+        try:
+            RHW, TW, TWF = getSensorData()
+            f = urllib2.urlopen(baseURL + "&field1=%s&field2=%s&field3=%s" % (TW, TWF, RHW))
+            print f.read()
+            print TW + " " + TWF+ " " + RHW
+            f.close()
+            sleep(int(myDelay))
+        except:
+            print 'exiting.'
+            break
+
+# call main"""
+if _name_ == '_main_':
+main()
