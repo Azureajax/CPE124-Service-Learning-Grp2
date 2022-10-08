@@ -1,0 +1,56 @@
+from flask import Flask
+from flask import render_template
+import RPi.GPIO as proj
+import time
+
+app= Flask(_name_)
+
+l1,l2,l3= 3,5,7
+
+proj.setwarnings(False)
+proj.setmode(proj.BOARD)
+proj.setup(l1, proj.OUT)
+proj.setup(l2, proj.OUT)
+proj.setup(l3, proj.OUT)
+proj.output(l1, 0)
+proj.output(l2, 0)
+proj.output(l3, 0)
+print("Done")
+
+@app.route('/')
+def index():
+    return render_template('webpage.html')
+    @app.route('/A')
+    
+def led1on():
+    rpi.output(led1,1)
+    return render_template('webpage.html')
+
+@app.route('/a')
+def led1off():
+    rpi.output(led1,0)
+    return render_template('webpage.html')
+
+@app.route('/B')
+def led2on():
+    rpi.output(led2,1)
+    return render_template('webpage.html')
+
+@app.route('/b')
+def led2off():
+    rpi.output(led2,0)
+    return render_template('webpage.html')
+
+@app.route('/C')
+def led3on():
+    rpi.output(led3,1)
+    return render_template('webpage.html')
+
+@app.route('/c')
+def led3off():
+    rpi.output(led3,0)
+    return render_template('webpage.html')
+
+if __name__=="__main__":
+    print("Start")
+    app.run(debug=True, host='192.168.1.57')
