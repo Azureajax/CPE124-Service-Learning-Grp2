@@ -18,13 +18,24 @@ APIkey = "PR998OE86JF4S5JH"
 Delay = 600 #how many seconds between posting data
 
 def getSensorData():
-    RHW, TW = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, DHTpin)
-    
-    #Convert from Celius to Farenheit
-    TWF = 9/5*TW+32
-   
-    # return dict
-    return (str(RHW), str(TW),str(TWF))
+    RHW, TW = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, DHTsensor)
+    # return a dictionary containing temperature and humidity values
+    return (str(RHW), str(TW))
+
+def LEDlightup():
+	RHW, TW= getSensorData()
+    #check temperature value and control led
+	if TW >= 36:
+		ledtemp.on()
+	else: 
+		ledtemp.off()
+
+    #check humidity value and control led
+	if RHW >= 60:
+		ledhum.on()
+	else:
+		ledhum.off()
+	return
 
     
 # main() function
