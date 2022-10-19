@@ -37,27 +37,26 @@ def LEDlightup():
 		ledhum.off()
 	return
 
-    
 # main() function
 def main():
     
-    print 'starting...'
+    print('starting...')
 
-    baseURL = 'https://api.thingspeak.com/update?api_key=%s' % myAPI
-    print baseURL
-
+    apiURL = 'https://api.thingspeak.com/update?api_key=%s' % APIkey
+    print(apiURL)
+    
     while True:
         try:
-            RHW, TW, TWF = getSensorData()
-            f = urllib2.urlopen(baseURL + "&field1=%s&field2=%s&field3=%s" % (TW, TWF, RHW))
-            print f.read()
-            print TW + " " + TWF+ " " + RHW
-            f.close()
-            sleep(int(myDelay))
+            RHW, TW = getSensorData()
+            wlink = urllib2.urlopen(apiURL + "&field1=%s&field2=%s&field3=%s" % (TW, RHW))
+            print (f.read())
+            print( TW + " " + " " + RHW)
+            LEDlightup()
+            wlink.close()
+            sleep(int(Delay))
         except:
-            print 'exiting.'
+            print('exiting.')
             break
 
-# call main"""
 if _name_ == '_main_':
-main()
+    main()
