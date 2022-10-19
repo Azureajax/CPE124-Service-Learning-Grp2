@@ -1,18 +1,21 @@
-# Import all the libraries we need to run
+# Import all the libraries needed
 import sys
 import RPi.GPIO as GPIO
 import os
 from time import sleep
+from gpiozero import LED
 import Adafruit_DHT
 import urllib2
 
 
-# Setup the pins we are connect to
-DHTpin = 23
+# Setup pins to be connected
+DHTsensor = 23
+ledtemp= LED(17)
+ledhum= LED(18)
 
-#Setup our API and delay
-myAPI = "PR998OE86JF4S5JH"
-myDelay = 15 #how many seconds between posting data
+#Setup API key and delay
+APIkey = "PR998OE86JF4S5JH"
+Delay = 600 #how many seconds between posting data
 
 def getSensorData():
     RHW, TW = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, DHTpin)
